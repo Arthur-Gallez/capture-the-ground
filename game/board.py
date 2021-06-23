@@ -11,7 +11,7 @@ def init_board(x, y, screen):
 def actu_board(x, y, screen,grille):
     for x_index in range(60):
         for y_index in range(50):
-            if grille[y_index][x_index]==1 or grille[y_index][x_index]=="M" :
+            if grille[y_index][x_index]==1 or grille[y_index][x_index] in ["M", "MH", "MB", "MG", "MD", "MCHG", "MCHD", "MCBG", "MCBD"]:
                  pg.draw.rect(screen, (0,0,250), [x_index * x/60, y_index * y/50, x_index * x/60 + x/60, y_index * y/50 + y/50])
             else :
                 if (x + y) % 2:

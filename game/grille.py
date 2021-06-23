@@ -5,11 +5,25 @@ class Grille :
         y_elem = 50
         self.grille = []
         self.player=(0,0,"X")#X == Sur un block | x == Sur Vide |XM == Sur mur de base
-        for _ in range(y_elem):
+        for y in range(y_elem):
             sub_grille = []
-            for i in range(x_elem):
-                if _ == 0 or i == 0 or i==59 or _==49:
-                    sub_grille.append("M")
+            for x in range(x_elem):
+                if x == 0 and y == 0:
+                    sub_grille.append("MCHG")
+                elif x == 59 and y == 49:
+                    sub_grille.append("MCBD")
+                elif x == 0 and y == 49:
+                    sub_grille.append("MCBG")
+                elif x == 59 and y == 0:
+                    sub_grille.append("MCHD")
+                elif x == 0:
+                    sub_grille.append("MG")
+                elif x == 59:
+                    sub_grille.append("MD")
+                elif y == 0:
+                    sub_grille.append("MH")
+                elif y == 49:
+                    sub_grille.append("MB")
                 else :
                     sub_grille.append(0)
             self.grille.append(sub_grille)
@@ -52,7 +66,7 @@ class Grille :
         #modifie le block ou il va
         go_on_square = self.get_square(x_pos,y_pos)
 
-        if go_on_square == "M":
+        if go_on_square == "M" or go_on_square == "MD" or go_on_square == "MG" or go_on_square == "MH" or go_on_square == "MB" or go_on_square == "MCBG" or go_on_square == "MCBD" or go_on_square == "MCHG" or go_on_square == "MCHD":
             self.player = (x_index,y_index,"XM")
             self.modif_value(previous[0],previous[1],"XM")
 

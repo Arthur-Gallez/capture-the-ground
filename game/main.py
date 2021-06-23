@@ -1,5 +1,5 @@
 #-----------------------------#
-# Versions : 0.3
+# Versions : 0.4
 #-----------------------------#
 
 
@@ -59,14 +59,29 @@ while is_running:
     elif keys[pygame.K_DOWN]:
         direction = "down"
 
-    if direction == "left":
+    if direction == "left" and grille_class.move_player(player_position[0] - player_speed, player_position[1]) is not None:
         player_position[0] -= player_speed
-    elif direction == "right":
+    elif direction == "right" and grille_class.move_player(player_position[0] + player_speed, player_position[1]) is not None:
         player_position[0] += player_speed
-    elif direction == "up":
+    elif direction == "up" and grille_class.move_player(player_position[0], player_position[1] - player_speed) is not None:
         player_position[1] -= player_speed
-    elif direction == "down":
+    elif direction == "down" and grille_class.move_player(player_position[0], player_position[1] + player_speed) is not None:
         player_position[1] += player_speed
+    else:
+        pos = grille_class.get_square(player_position[0], player_position[1])
+        print(pos)
+        if direction == "left":
+            if pos != "MG" and pos != "MCHG" and pos != "MCBG":
+                player_position[0] -= player_speed
+        elif direction == "right":
+            if pos != "MD" and pos != "MCHD" and pos != "MCBD":
+                player_position[0] += player_speed
+        elif direction == "up":
+            if pos != "MH" and pos != "MCHG" and pos != "MCHD":
+                player_position[1] -= player_speed
+        elif direction == "down":
+            if pos != "MB" and pos != "MCBG" and pos != "MCBD":
+                player_position[1] += player_speed
 
 
     pygame.draw.rect(SCREEN, RED, (player_position[0], player_position[1], 10, 10))
