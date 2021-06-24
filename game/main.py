@@ -1,5 +1,5 @@
 #-----------------------------#
-# Versions : 0.6
+# Versions : 0.7
 #-----------------------------#
 
 
@@ -69,7 +69,6 @@ while is_running:
         player_position[1] += player_speed
     else:
         pos = grille_class.get_square(player_position[0], player_position[1])
-        print(pos)
         if direction == "left":
             if pos != "MG" and pos != "MCHG" and pos != "MCBG":
                 player_position[0] -= player_speed
@@ -85,8 +84,10 @@ while is_running:
 
 
     if grille_class.get_square(player_position[0], player_position[1]) == 0:
-        print(grille_class.add_log((player_position[0]//10, player_position[1]//10)))
+        grille_class.add_log([player_position[0]//10, player_position[1]//10, direction])
     else:
+        print(grille_class.log)
+        render_zone(grille_class)
         grille_class.log = []
 
 

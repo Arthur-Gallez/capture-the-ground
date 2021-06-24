@@ -34,7 +34,7 @@ class Grille :
         #return None si le position sort du cadre de jeu
         x_index=x_pos//10
         y_index=y_pos//10
-        if x_index>60 or y_index>50:
+        if x_index>=60 or y_index>=50:
             return None
         return self.grille[y_index][x_index]
 
@@ -49,9 +49,9 @@ class Grille :
     def modif_value(self, x_pos,y_pos,value):
         x_index=x_pos//10
         y_index=y_pos//10
-        if x_index>60 or y_index>50:
+        if x_index>=60 or y_index>=50:
             return None
-        self.grille[y_index][x_index]==value
+        self.grille[y_index][x_index]=value
 
 
     def move_player(self, x_pos,y_pos):
