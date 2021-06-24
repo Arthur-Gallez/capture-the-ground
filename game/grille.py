@@ -5,6 +5,7 @@ class Grille :
         y_elem = 50
         self.grille = []
         self.player=(0,0,"X")#X == Sur un block | x == Sur Vide |XM == Sur mur de base
+        self.log = []
         for y in range(y_elem):
             sub_grille = []
             for x in range(x_elem):
@@ -33,17 +34,22 @@ class Grille :
         #return None si le position sort du cadre de jeu
         x_index=x_pos//10
         y_index=y_pos//10
-        if x_index>60 or y_index>40:
+        if x_index>60 or y_index>50:
             return None
         return self.grille[y_index][x_index]
 
     def get_grille(self):
         return self.grille
 
+    def add_log(self, value):
+        if len(self.log) == 0 or (len(self.log) > 0 and self.log[-1] != value):
+            self.log.append(value)
+        return self.log
+
     def modif_value(self, x_pos,y_pos,value):
         x_index=x_pos//10
         y_index=y_pos//10
-        if x_index>60 or y_index>40:
+        if x_index>60 or y_index>50:
             return None
         self.grille[y_index][x_index]==value
 
@@ -51,7 +57,7 @@ class Grille :
     def move_player(self, x_pos,y_pos):
         x_index=x_pos//10
         y_index=y_pos//10
-        if x_index>60 or y_index>40:
+        if x_index>60 or y_index>50:
             return None
         previous = self.player
 

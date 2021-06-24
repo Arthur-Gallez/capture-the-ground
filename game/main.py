@@ -1,5 +1,5 @@
 #-----------------------------#
-# Versions : 0.4
+# Versions : 0.5
 #-----------------------------#
 
 
@@ -30,7 +30,7 @@ YELLOW = (255, 255, 255)
 FPS = 60
 fpsClock = pygame.time.Clock()
 
-player_speed = 3
+player_speed = 5
 player_position = [0,0] # [x,y]
 direction = "stop"
 #-----------------------------#
@@ -43,7 +43,7 @@ is_running = True
 grille_class = Grille()
 while is_running:
     matrice= grille_class.get_grille()
-    actu_board(600, 500, SCREEN,matrice)
+    actu_board(600, 500, SCREEN,matrice, grille_class)
     player = pygame.Rect(player_position,(10,10))
     pygame.draw.rect(SCREEN, RED, player)
     for event in pygame.event.get():
@@ -83,6 +83,11 @@ while is_running:
             if pos != "MB" and pos != "MCBG" and pos != "MCBD":
                 player_position[1] += player_speed
 
+
+    if grille_class.get_square(player_position[0], player_position[1]) == 0:
+        print(grille_class.add_log((player_position[0]//10, player_position[1]//10)))
+    else:
+        grille_class.log = []
 
     pygame.draw.rect(SCREEN, RED, (player_position[0], player_position[1], 10, 10))
 
